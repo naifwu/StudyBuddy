@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat | StudyBuddy</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+  <style>
+    .chat-container {
+      height: 500px;
+      overflow-y: scroll;
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-bottom: 15px;
+      background-color: #f8f8f8;
+    }
+    .chat-input {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+        <h1 class="logo-text"><a href="index.html" class="logo-link">StudyBuddy</a></h1>
+      </div>
+      <ul class="nav-links">
+        <li><a href="features.html">Features</a></li>
+        <li><a href="testimonials.html">Testimonials</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="chat.html">chat</a></li>
+        <li><a href="dashboard.html">dashboard</a></li>
+        <li><a href="find-partners.html">Find Partners</a></li>
+        <li><a href="signup-login.html">signup-login</a></li>
+        <li><a href="settings.html">settings</a></li>
+        <li><a href="partner-profile.html">partner-profile</a></li>
+        <li><a href="profile.html">profile</a></li>
+        <li><a href="requests.html">requests</a></li>
+        <li><a href="resources.html">resources</a></li>
+      </ul>
+      <div class="language-switcher">
+        <a href="#" class="active">English</a>
+        <span> | </span>
+        <a href="#">العربية</a>
+      </div>
+    </nav>  </header>
+
+  <main>
+    <section id="chat" class="container">
+      <h2 class="text-center mb-5">Chat with Study Partners</h2>
+      
+      <div class="chat-container" id="chat-container">
+        <!-- Chat messages will be displayed here -->
+      </div>
+      <form id="chat-form" class="form-inline">
+        <input type="text" class="form-control chat-input" id="message" placeholder="Type your message here...">
+        <button type="submit" class="btn btn-primary ml-2">Send</button>
+      </form>
+
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 StudyBuddy. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const chatForm = document.getElementById('chat-form');
+    const chatContainer = document.getElementById('chat-container');
+    const messageInput = document.getElementById('message');
+
+    chatForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const message = messageInput.value.trim();
+      
+      if (message) {
+        addMessageToChat(message);
+        messageInput.value = '';
+      }
+    });
+
+    function addMessageToChat(message) {
+      const messageElement = document.createElement('p');
+      messageElement.textContent = message;
+      chatContainer.appendChild(messageElement);
+
+      // Scroll to the bottom of the chat container
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+  </script>
+
+  <script src="js/main.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
