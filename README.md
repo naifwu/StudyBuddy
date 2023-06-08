@@ -1,4 +1,4 @@
-# StudyBuddy
+# StudyBuddy  - Imamu University
 
 
 StudyBuddy is a web application that helps students find and connect with study partners based on their university, major, courses, and preferred study times. The goal of the application is to facilitate collaboration among students and improve their learning experience.
