@@ -3,37 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign Up / Log In | StudyBuddy</title>
+  <title>StudyBuddy</title>
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
 </head>
+
 <body>
+  <div id="navbar-container"></div>
   <header>
-    <nav>
-      <div class="logo">
-        <h1 class="logo-text"><a href="index.html" class="logo-link">StudyBuddy</a></h1>
-      </div>
-      <ul class="nav-links">
-        <li><a href="features.html">Features</a></li>
-        <li><a href="testimonials.html">Testimonials</a></li>
-        <li><a href="faq.html">FAQ</a></li>
-        <li><a href="chat.html">chat</a></li>
-        <li><a href="dashboard.html">dashboard</a></li>
-        <li><a href="find-partners.html">Find Partners</a></li>
-        <li><a href="signup-login.html">signup-login</a></li>
-        <li><a href="settings.html">settings</a></li>
-        <li><a href="partner-profile.html">partner-profile</a></li>
-        <li><a href="profile.html">profile</a></li>
-        <li><a href="requests.html">requests</a></li>
-        <li><a href="resources.html">resources</a></li>
-      </ul>
-      <div class="language-switcher">
-        <a href="#" class="active">English</a>
-        <span> | </span>
-        <a href="#">العربية</a>
-      </div>
-    </nav>
+    <div id="user-info"></div>
+    </section>
+
   </header>
 
   <main>
@@ -41,37 +22,53 @@
       <h2 class="text-center mb-5">Sign Up / Log In</h2>
       
       <div class="row">
-        <div class="col-md-6">
-          <h3>Sign Up</h3>
-          <form>
-            <div class="form-group">
-              <label for="signupEmail">Email address</label>
-              <input type="email" class="form-control" id="signupEmail" placeholder="Enter email">
+        <div class="col-md-5 mx-auto">
+          <div class="card">
+            <div class="card-header">
+              <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="signup-tab" data-toggle="tab" href="#signup" role="tab" aria-controls="signup" aria-selected="true">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="false">Log In</a>
+                </li>
+              </ul>
             </div>
-            <div class="form-group">
-              <label for="signupPassword">Password</label>
-              <input type="password" class="form-control" id="signupPassword" placeholder="Password">
+            <div class="card-body">
+              <div class="tab-content mt-2">
+                <div class="tab-pane active" id="signup" role="tabpanel" aria-labelledby="signup-tab">
+                  <form action="/users/signup" method="POST">
+                    <div class="form-group">
+                      <label for="signupEmail">Email address</label>
+                      <input type="email" class="form-control" id="signupEmail" name="email" placeholder="Enter email" autocomplete="new-email">
+                    </div>
+                    <div class="form-group">
+                      <label for="signupPassword">Password</label>
+                      <input type="password" class="form-control" id="signupPassword" name="password" placeholder="Password" autocomplete="new-password">
+                    </div>
+                    <div class="form-group">
+                      <label for="signupConfirmPassword">Confirm Password</label>
+                      <input type="password" class="form-control" id="signupConfirmPassword" name="confirmPassword" placeholder="Confirm Password" autocomplete="new-password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                  </form>
+                </div>
+                <div class="tab-pane" id="login" role="tabpanel" aria-labelledby="login-tab">
+                  <form action="/users/login" method="POST">
+                    <div class="form-group">
+                      <label for="loginEmail">Email address</label>
+                      <input type="email" class="form-control" id="loginEmail" name="email" placeholder="Enter email" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                      <label for="loginPassword">Password</label>
+                      <input type="password" class="form-control" id="loginPassword" name="password" placeholder="Password" autocomplete="off">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Log In</button>
+                  </form>
+                </div>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="signupConfirmPassword">Confirm Password</label>
-              <input type="password" class="form-control" id="signupConfirmPassword" placeholder="Confirm Password">
-            </div>
-            <button type="submit" class="btn btn-primary">Sign Up</button>
-          </form>
-        </div>
-        <div class="col-md-6">
-          <h3>Log In</h3>
-          <form>
-            <div class="form-group">
-              <label for="loginEmail">Email address</label>
-              <input type="email" class="form-control" id="loginEmail" placeholder="Enter email">
-            </div>
-            <div class="form-group">
-              <label for="loginPassword">Password</label>
-              <input type="password" class="form-control" id="loginPassword" placeholder="Password">
-            </div>
-            <button type="submit" class="btn btn-primary">Log In</button>
-          </form>
+          </div>
         </div>
       </div>
     </section>
@@ -83,7 +80,38 @@
     </footer>
   </footer>
 
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    function updateNavbar() {
+      const isLoggedIn = localStorage.getItem('jwt');
+      const navLinks = document.querySelector('.nav-links');
+
+      if (isLoggedIn) {
+        navLinks.innerHTML = `
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="settings.html">Settings</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="#" onclick="logout()">Logout</a></li>
+        `;
+      } else {
+        navLinks.innerHTML = `
+          <li><a href="signup-login.html">Sign Up / Log In</a></li>
+        `;
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem('jwt');
+      updateNavbar();
+    }
+
+    updateNavbar();
+  </script>
   <script src="js/main.js"></script>
+  <script src="js/navbar.js"></script>
+
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

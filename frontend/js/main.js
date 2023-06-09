@@ -1,30 +1,48 @@
-document.addEventListener('DOMContentLoaded', function () {
-  var languageSwitcherLinks = document.querySelectorAll('.language-switcher a');
-
-  languageSwitcherLinks.forEach(function (link) {
-    link.addEventListener('click', function (event) {
-      event.preventDefault();
-      var language = event.target.textContent === 'English' ? 'en' : 'ar';
-      switchLanguage(language);
+function renderHeader() {
+  fetch('/api/user-status')
+    .then((response) => response.json())
+    .then((data) => {
+      const userInfoContainer = document.getElementById('user-info');
+      if (data.isLoggedIn) {
+        userInfoContainer.innerHTML = `
+          Hi, ${data.userEmail}
+          <a href="/users/signout">Sign out</a>
+        `;
+      } else {
+        userInfoContainer.innerHTML = `
+        <a href="signup-login.html" class="login-btn">Sign in</a>
+        `;
+      }
     });
-  });
+}
+
+function updateNavbar() {
+  fetch('/api/user-status')
+    .then((response) => response.json())
+    .then((data) => {
+      const signupLoginLink = document.getElementById('signup-login-link');
+      if (data.isLoggedIn) {
+        // Hide the signup/login link
+        signupLoginLink.style.display = 'none';
+      } else {
+        // Show the signup/login link
+        signupLoginLink.style.display = 'inline';
+      }
+    });
+}
+
+function redirectToLoginIfNotLoggedIn() {
+  fetch('/api/user-status')
+    .then((response) => response.json())
+    .then((data) => {
+      if (!data.isLoggedIn) {
+        window.location.href = 'signup-login.html';
+      }
+    });
+}
+
+// Call renderHeader() and updateNavbar() on page load
+document.addEventListener('DOMContentLoaded', () => {
+  renderHeader();
+  updateNavbar();
 });
-
-function switchLanguage(language) {
-  fetch(`locales/${language}.json`)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (translations) {
-      updateTranslations(translations);
-    });
-}
-
-function updateTranslations(translations) {
-  document.querySelector('#features h3').textContent = translations.features;
-  document.querySelector('#testimonials h3').textContent = translations.testimonials;
-  document.querySelector('#faq h3').textContent = translations.faq;
-  document.querySelector('#contact h3').textContent = translations.contact;
-}
-
-

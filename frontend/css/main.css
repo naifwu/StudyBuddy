@@ -180,68 +180,92 @@ main {
   cursor: pointer;
   border: none;
   border-radius: 25px;
-  transition: background-color 0.3s ease;
+ width: 100%;
 }
-
-.contact-form button:hover {
-  background-color: var(--secondary-color);
-}
-
+/* Add box shadows */
+.hero, .feature, .testimonial, .faq-item {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  }
 /* Footer styles */
-footer {
+.footer {
   background-color: var(--secondary-color);
+  padding: 1rem 0;
   color: var(--white);
-  padding: 1rem;
   text-align: center;
+  font-size: 0.9rem;
 }
 
-/* Responsive styles */
-@media (max-width: 1024px) {
-  .nav-links {
-    display: none;
-  }
-
-  .hero-content {
-    max-width: 600px;
-  }
-}
-
-@media (max-width: 768px) {
-  .hero-content {
-    max-width: 400px;
-  }
-
-  .contact-form {
-    width: 80%;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-content {
-    max-width: 300px;
-  }
-}
-
-/* Example styles for the logo */
-.logo-text {
-  /* Add styles for the h1 element */
-  margin: 0;
-  font-size: 1.5rem;
-}
-
-.logo-link {
-  /* Add styles for the anchor element */
+/* Additions */
+.login-signup-btn {
+  background-color: var(--primary-color);
+  color: var(--white);
+  padding: 0.5rem 1.5rem;
   text-decoration: none;
-  color: inherit;
-}
-
-.logo-text {
-  color: #ff6b81; /* This is the default color of the Bootstrap primary button */
-  text-decoration: none;
+  border-radius: 25px;
   font-weight: bold;
 }
 
-.logo-text:hover {
-  color: #ff6b81; /* This is the default hover color of the Bootstrap primary button */
+/* Add animations */
+.feature, .testimonial, .faq-item {
+  transition: all 0.3s ease-out;
+  }
+  
+  .feature:hover, .testimonial:hover, .faq-item:hover {
+  transform: translateY(-1rem);
+  cursor: pointer;
+  }
+  /* Style for the "Sign in" button */
+.login-btn {
+  display: inline-block;
+  background-color: var(--background-color);
+  color: var(--primary-color);
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 25px;
   text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
 }
+
+.login-btn:hover {
+  background-color: #ffffff;
+}
+
+/* Style for the user info container */
+#user-info {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 1.2rem;
+  color: var(--gray);
+  margin-left: 1rem;
+}
+
+#user-info a {
+  margin-left: 1rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  text-decoration: none;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #user-info {
+    margin-left: 0;
+  }
+  
+  #user-info a {
+    margin-left: 0.5rem;
+  }
+} 
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+}
+
